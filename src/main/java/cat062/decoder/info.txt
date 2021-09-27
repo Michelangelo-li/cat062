@@ -1,0 +1,97 @@
+EUROCONTROL STANDARD DOCUMENT
+FOR
+SURVEILLANCE DATA EXCHANGE
+Part 9 : Category 062
+SDPS Track Messages
+
+Edition : 1.15
+Edition Date : September 2011
+Status : Released Issue
+Class : General Public
+
+ASTERIX中的数据都以十六进制数表示，在进行数据分析时候，转成十进制
+大部分二次雷达都支持普通A/C模式询问和S模式询问
+
+一、S模式的应用
+
+在欧洲，S模式的应用可以分为两个阶段：第一阶段S模式基本型监视，第二阶段S模式增强型监视；
+
+（一）S模式基本型监视（ELS）
+
+指利用S模式的基本能力实现基本功能，
+包括：获取飞机的地址码和呼号，以用来识别飞机；
+获取飞机应答机能力的报告，可以让地面的雷达设备得到应答机目前通信能力；
+获取飞机的高度信息；
+获取飞机的飞行状态信息；
+获取飞机SI编码能力报告，
+以明确机载设备是否具备识别地面SI码设备的能力。
+
+这些都是传统二次雷达所不具备的，可以解决传统二次雷达一些固有的问题，包括：
+
+1、由于采用了24位bit码作为飞机的地址码，可以提供近170万个地址码，相比原来的3/A码，可以解决飞机识别码不够的问题；
+
+2、提高监视数据的完整性，通过选择性询问，可以解决同步串扰、过度询问、反射等问题，提高数据的可靠性；
+
+3、有利于改进空域态势显示和跟踪，S模式中飞机呼号和更好的高度精度有利于自动化系统的航迹跟踪计算，并向管制人员展示；
+
+4、相关信息在空管自动化系统中的应用有利于告警功能的实现和完善；
+
+（二）S模式增强型监视（EHS）
+
+S模式增强型监视是在基本型的基础上增加了8个DAP数据，具体见表1（表中的后两列分别代表Track Angle Rate可用和不可用时DAP的数据内容）。
+
+这8个参数比ELS有更多的优势，包括：
+
+1、数据信息直接来源于飞机自身，可以帮助自动化系统更好的实现航迹跟踪，并且直接显示在管制员屏幕上，
+帮助管制人员更加直观的了解飞机状态，判断飞机是否按照管制要求飞行；
+
+2、降低管制人员的工作负荷，由于部分信息管制人员可以直接读取下行数据，可以有效减少管制员和飞行员之间的通话量；
+
+3、通过提供更多的信息，实现管制员与飞行员之间的交叉检查，从而对潜在冲突的实现提前预警。
+
+二、DAP数据的应用分析 Downlink Airborne Parameter，简称DAP
+
+前文中提到的8类数据，对管制人员和自动化系统来说有着显著的利用价值，
+其中直接被管制人员利用的数据可以称为CAPs（Controller Access Parameters），
+可以用于自动化系统以提高监视能力的数据可以称为SAPs（System Access Parameters），这
+些分类并没有绝对的区分，一个数据可以是CAPs的同时也是SAPs。
+
+二、DAP数据的应用分析
+
+前文中提到的8类数据，对管制人员和自动化系统来说有着显著的利用价值，其中直接被管制人员利用的数据可以称为CAPs（Controller Access Parameters），可以用于自动化系统以提高监视能力的数据可以称为SAPs（System Access Parameters），这些分类并没有绝对的区分，一个数据可以是CAPs的同时也是SAPs。
+
+（一）Selected Altitude parameter
+
+该参数可以用于自动化系统的告警机制中，以减少在垂直方向上可能产生的告警；同时该参数也可以在管制人员的显示界面上直观显示，或者用于与管制人员输入的指定高度进行交叉检查，从而有效地降低潜在的高度冲突风险；
+
+（二）Roll Angle parameter
+
+该参数可以配合空速（True Airspeed）在自动化系统中进行融汇计算，从而提高航迹精度，为管制人员水平方向上的调度指挥提供更可靠的信息；
+
+（三）Track Angle Rater parameter
+
+該参数为目标的转向速度，也被称为Rate of Turn parameter，其在自动化系统中进行融汇计算时可以起到与Roll Angle和True Airspeed融汇计算一样的作用；
+
+（四）True Track Angle parameter
+
+该参数可以配合地速（Ground Speed）数据在自动化系统中进行融汇计算，在航迹初始化阶段提高航迹精度，特别是雷达覆盖边缘处的航迹初始化；
+
+（五）Ground Speed parameter
+
+该参数来源于机载设备，同样也可以用地面设备测量得出；
+
+（六）Magnetic Heading parameter
+
+该参数可以在管制席位屏幕上直观显示，也可用于系统航迹的计算，为管制人员水平方向上的调度指挥提供更可靠的信息；
+
+（七）Indicated Airspeed parameter
+
+该参数与Magnetic Heading类似，同样可以在管制席位屏幕上直观显示，也可用于系统航迹的计算；
+
+（八）Vertical rate parameter
+
+该参数包括两个参数，分别是气压高度速率（Barometric Altitude Rate）和惯性垂直速度（the Inertial Vertical Velocity）；
+
+（九）Barometric Pressure Setting
+
+该参数为飞机上设置的大气压力值，可以用来与管制已有的参数进行比对，特别是在进近终端区域时，该参数可以和Selected Altitude参数一起可以为高度冲突提供早期预警；
